@@ -1,0 +1,184 @@
+<style>
+.vd { --bg: oklch(0.1593 0 0); --card: oklch(0.2046 0 0); --card2: oklch(0.2393 0 0); --fg: oklch(0.9288 0.0126 255.5078); --mute: oklch(0.7122 0 0); --dim: oklch(0.5052 0 0); --border: oklch(0.2809 0 0); --c1: oklch(0.8003 0.1821 151.711); --c2: oklch(0.7137 0.1434 254.624); --c3: oklch(0.709 0.1592 293.5412); --c4: oklch(0.8369 0.1644 84.4286); --c5: oklch(0.7845 0.1325 181.912); background: var(--bg); color: var(--fg); font-family: 'Inter', -apple-system, system-ui, sans-serif; font-size: 13px; border-radius: 12px; border: 1px solid var(--border); letter-spacing: -0.005em; overflow: hidden; }
+.vd * { box-sizing: border-box; }
+.vd .m { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum'; letter-spacing: 0; }
+.vd .head { padding: 18px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.vd .title { font-size: 15px; font-weight: 500; letter-spacing: -0.015em; display: flex; align-items: center; gap: 10px; }
+.vd .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--c1); box-shadow: 0 0 0 4px color-mix(in oklab, var(--c1) 18%, transparent); }
+.vd .sub { color: var(--mute); font-size: 12px; margin-top: 4px; }
+.vd .badges { display: flex; gap: 6px; }
+.vd .badge { font-size: 11px; padding: 3px 9px; border: 1px solid var(--border); border-radius: 999px; color: var(--mute); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.vd .kpis { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+.vd .kpi { padding: 16px 20px; border-right: 1px solid var(--border); }
+.vd .kpi:last-child { border-right: none; }
+.vd .lbl { font-size: 10.5px; color: var(--mute); text-transform: uppercase; letter-spacing: 0.07em; }
+.vd .val { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 22px; font-weight: 500; margin-top: 8px; letter-spacing: -0.02em; display: flex; align-items: baseline; gap: 5px; }
+.vd .u { font-size: 11px; color: var(--mute); font-weight: 400; }
+.vd .delta { font-size: 11px; color: var(--mute); margin-top: 6px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.vd .up { color: var(--c1); }
+.vd .dn { color: oklch(0.7 0.18 30); }
+.vd .row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+.vd .pnl { padding: 16px 20px; border-right: 1px solid var(--border); }
+.vd .pnl:last-child { border-right: none; }
+.vd .pnl-h { font-size: 11px; color: var(--mute); text-transform: uppercase; letter-spacing: 0.06em; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.vd .pnl-h .r { color: var(--fg); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; text-transform: none; letter-spacing: 0; }
+.vd .leg { display: flex; gap: 14px; margin: -4px 0 8px; font-size: 11px; color: var(--mute); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.vd .leg span { display: inline-flex; align-items: center; gap: 6px; }
+.vd .leg i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.vd .ch { position: relative; width: 100%; height: 165px; }
+.vd table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.vd th { text-align: right; font-weight: 400; color: var(--mute); padding: 9px 10px; border-bottom: 1px solid var(--border); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; }
+.vd th:first-child, .vd td:first-child { text-align: left; }
+.vd td { padding: 9px 10px; border-bottom: 1px solid var(--border); text-align: right; }
+.vd tbody tr:last-child td { border-bottom: none; }
+.vd tbody tr:hover td { background: color-mix(in oklab, var(--card) 60%, transparent); }
+.vd .sec { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.vd .sec-h { font-size: 11px; color: var(--mute); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+.vd .sec-h .r { color: var(--fg); font-family: 'JetBrains Mono', ui-monospace, monospace; text-transform: none; letter-spacing: 0; font-size: 11px; }
+.vd .bar { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; }
+.vd .bar-l { width: 28px; color: var(--mute); }
+.vd .trk { flex: 1; height: 22px; background: var(--card); border-radius: 4px; position: relative; overflow: hidden; border: 1px solid var(--border); }
+.vd .fil { height: 100%; background: var(--c1); display: flex; align-items: center; padding: 0 8px; color: oklch(0.15 0 0); font-weight: 500; font-size: 11px; transition: width .4s ease; }
+.vd .bar-n { width: 68px; text-align: right; color: var(--fg); }
+.vd .foot { padding: 11px 22px; display: flex; justify-content: space-between; align-items: center; color: var(--dim); font-size: 11px; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.vd .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+</style>
+
+<div class="vd">
+  <div class="head">
+    <div>
+      <div class="title"><span class="pulse"></span>Qwen3.6-27B-MLX-8bit</div>
+      <div class="sub">Performance benchmark · oMLX v0.3.9.dev1 · single request + continuous batching</div>
+    </div>
+    <div class="badges">
+      <span class="badge">8-bit</span>
+      <span class="badge">MLX</span>
+      <span class="badge">33.9 GB</span>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi">
+      <div class="lbl">Peak throughput</div>
+      <div class="val">523.6<span class="u">tok/s</span></div>
+      <div class="delta up">↑ 4.52× over pp1024</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Generation rate</div>
+      <div class="val">15.7<span class="u">tg tok/s</span></div>
+      <div class="delta">64.00 ms / token base</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">4× batch speedup</div>
+      <div class="val">1.96×<span class="u">tg</span></div>
+      <div class="delta up">30.7 tok/s aggregate</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Peak memory</div>
+      <div class="val">40.09<span class="u">GB</span></div>
+      <div class="delta">+7.04 GB at 32k ctx</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="pnl">
+      <div class="pnl-h"><span>Throughput by context length</span><span class="r">tok/s</span></div>
+      <div class="leg"><span><i style="background:#4CE38E;"></i>prefill TPS</span><span><i style="background:#82B4F5;"></i>end-to-end</span></div>
+      <div class="ch"><canvas id="vdThru" role="img" aria-label="Prefill throughput peaks at 812.7 tok/s at 4k context then decays; end-to-end throughput rises from 115 to 523 tok/s as context grows from 1k to 32k.">Throughput data: prefill peaks 812.7 at 4k. End-to-end grows 115.7 to 523.6 across 1k to 32k.</canvas></div>
+    </div>
+    <div class="pnl">
+      <div class="pnl-h"><span>Time to first token</span><span class="r">seconds</span></div>
+      <div class="leg"><span><i style="background:#E8C76A;"></i>TTFT</span><span><i style="background:#B095F0;"></i>TPOT (ms/tok)</span></div>
+      <div class="ch"><canvas id="vdTtft" role="img" aria-label="TTFT scales near-quadratically from 1.8s at 1k to 53.9s at 32k. TPOT climbs gently from 64 to 70 ms per token.">TTFT 1.8s to 53.9s; TPOT 64.0 to 70.2 ms.</canvas></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h"><span>Single request results</span><span class="r">tg = 128 tokens fixed</span></div>
+    <table>
+      <thead>
+        <tr><th>Test</th><th>TTFT</th><th>TPOT</th><th>pp TPS</th><th>tg TPS</th><th>E2E</th><th>Throughput</th><th>Peak mem</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>pp1024</td><td>1.83 s</td><td>64.00 ms</td><td>559.1</td><td>15.7</td><td>9.96 s</td><td>115.7</td><td>33.05 GB</td></tr>
+        <tr><td>pp4096</td><td>5.04 s</td><td>64.99 ms</td><td>812.7</td><td>15.5</td><td>13.29 s</td><td>317.8</td><td>34.56 GB</td></tr>
+        <tr><td>pp8192</td><td>11.11 s</td><td>66.17 ms</td><td>737.2</td><td>15.2</td><td>19.52 s</td><td>426.3</td><td>35.59 GB</td></tr>
+        <tr><td>pp16384</td><td>24.53 s</td><td>68.39 ms</td><td>667.8</td><td>14.7</td><td>33.22 s</td><td>497.1</td><td>37.09 GB</td></tr>
+        <tr><td>pp32768</td><td>53.91 s</td><td>70.23 ms</td><td>607.8</td><td>14.4</td><td>62.83 s</td><td>523.6</td><td>40.09 GB</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="pnl">
+      <div class="pnl-h"><span>Continuous batching · tg TPS</span><span class="r">pp1024 / tg128</span></div>
+      <div class="bar"><div class="bar-l">1×</div><div class="trk"><div class="fil" style="width: 51%;">15.7</div></div><div class="bar-n">1.00×</div></div>
+      <div class="bar"><div class="bar-l">2×</div><div class="trk"><div class="fil" style="width: 62%;">19.1</div></div><div class="bar-n">1.22×</div></div>
+      <div class="bar"><div class="bar-l">4×</div><div class="trk"><div class="fil" style="width: 100%;">30.7</div></div><div class="bar-n">1.96×</div></div>
+      <div style="margin-top:10px; font-size:11px; color: var(--mute); font-family:'JetBrains Mono',monospace;">Aggregate gain from batching scales sub-linearly · 4× concurrency yields ~2× total tg rate</div>
+    </div>
+    <div class="pnl">
+      <div class="pnl-h"><span>Per-request batching cost</span><span class="r">avg per stream</span></div>
+      <table>
+        <thead><tr><th>Batch</th><th>TTFT</th><th>pp / req</th><th>E2E</th></tr></thead>
+        <tbody>
+          <tr><td>1×</td><td>1.83 s</td><td>559.1</td><td>9.96 s</td></tr>
+          <tr><td>2×</td><td>3.52 s</td><td>277.6</td><td>17.09 s</td></tr>
+          <tr><td>4×</td><td>7.68 s</td><td>125.2</td><td>24.86 s</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><span class="dot" style="background: var(--c1);"></span>tg = 128 fixed · pp swept 1k → 32k</span>
+    <span>2026-05-10 · Apple Silicon · oMLX</span>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+(function(){
+  const accent = '#4CE38E', blue = '#82B4F5', amber = '#E8C76A', purple = '#B095F0';
+  const muted = '#9A9A9A', grid = 'rgba(255,255,255,0.06)';
+  const labels = ['1k','4k','8k','16k','32k'];
+
+  Chart.defaults.color = muted;
+  Chart.defaults.font.family = "'JetBrains Mono', ui-monospace, monospace";
+  Chart.defaults.font.size = 10;
+  Chart.defaults.borderColor = grid;
+
+  new Chart(document.getElementById('vdThru'), {
+    type: 'line',
+    data: { labels, datasets: [
+      { label: 'pp TPS', data: [559.1, 812.7, 737.2, 667.8, 607.8], borderColor: accent, backgroundColor: 'rgba(76,227,142,0.10)', tension: 0.35, fill: true, pointRadius: 3, pointBackgroundColor: accent, borderWidth: 1.5 },
+      { label: 'end-to-end', data: [115.7, 317.8, 426.3, 497.1, 523.6], borderColor: blue, borderDash: [4,3], tension: 0.35, fill: false, pointRadius: 3, pointBackgroundColor: blue, borderWidth: 1.5 }
+    ]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1A1A1A', borderColor: '#292929', borderWidth: 1, callbacks: { label: c => c.dataset.label + ': ' + c.raw.toFixed(1) + ' tok/s' } } },
+      scales: {
+        x: { grid: { color: grid }, ticks: { color: muted } },
+        y: { grid: { color: grid }, ticks: { color: muted, callback: v => v + '' }, beginAtZero: true }
+      }
+    }
+  });
+
+  new Chart(document.getElementById('vdTtft'), {
+    type: 'bar',
+    data: { labels, datasets: [
+      { type: 'bar', label: 'TTFT (s)', data: [1.831, 5.040, 11.113, 24.533, 53.910], backgroundColor: amber, borderRadius: 2, barThickness: 18, yAxisID: 'y' },
+      { type: 'line', label: 'TPOT (ms/tok)', data: [64.00, 64.99, 66.17, 68.39, 70.23], borderColor: purple, backgroundColor: purple, tension: 0.3, pointRadius: 3, borderWidth: 1.5, yAxisID: 'y1' }
+    ]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1A1A1A', borderColor: '#292929', borderWidth: 1, callbacks: { label: c => c.dataset.label === 'TTFT (s)' ? 'TTFT: ' + c.raw.toFixed(2) + ' s' : 'TPOT: ' + c.raw.toFixed(2) + ' ms' } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: muted } },
+        y: { position: 'left', grid: { color: grid }, ticks: { color: muted, callback: v => v + 's' }, beginAtZero: true },
+        y1: { position: 'right', grid: { display: false }, ticks: { color: muted, callback: v => v + 'ms' }, suggestedMin: 60, suggestedMax: 72 }
+      }
+    }
+  });
+})();
+</script>
